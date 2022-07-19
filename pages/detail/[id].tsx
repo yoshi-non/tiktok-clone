@@ -23,7 +23,7 @@ const Detail = ({ postDetails } : IProps) => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const router = useRouter()
   const { userProfile }: any = useAuthStore()
-  const [comment, setComment] = useState('')
+  const [comment, setComment] = useState<string>('')
   const [isPostingComment, setIsPostingComment] = useState(false)
 
   const onVideoClick = () => {
@@ -54,7 +54,7 @@ const Detail = ({ postDetails } : IProps) => {
     }
   }
   
-  const addComment = async (e) => {
+  const addComment = async (e : { preventDefault: () => void }) => {
     e.preventDefault()
     
     if (userProfile && comment) {
@@ -171,7 +171,7 @@ const Detail = ({ postDetails } : IProps) => {
   )
 }
 
-export const getServerSideProps =async ({params: {id}} : {params: {id: string}}) => {
+export const getServerSideProps = async ({params: {id}} : {params: {id: string}}) => {
   const { data } = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/post/${id}`)
 
   return {
