@@ -77,7 +77,7 @@ const Profile = ({ data } : IProps) => {
 export const getServerSideProps = async ({
     params:{id},
 } : {
-    params: string
+    params: {id : string}
 }) => {
     const res = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/profile/${id}`)
 
