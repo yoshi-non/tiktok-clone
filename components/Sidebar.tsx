@@ -3,15 +3,14 @@ import React, { useState } from 'react'
 import GoogleLogin from 'react-google-login'
 import {AiFillHome, AiOutlineMenu} from "react-icons/ai"
 import {ImCancelCircle} from "react-icons/im"
+import useAuthStore from '../store/authStore'
 import Discover from './Discover'
 import Footer from './Footer'
 import SuggestedAccounts from './SuggestedAccounts'
 
 const Sidebar = () => {
   const [showSidebar, setShowSidebar] = useState(true)
-
-  const userProfile = false
-
+  const { fetchAllUsers, allUsers }: any = useAuthStore();
   const normalLink = "flex items-center gap-3 hover:bg-primary p-3 justify-center xl:justify-start cursor-pointer font-semibold text-[#FD7E00] rounded"
   
   return (
@@ -36,7 +35,10 @@ const Sidebar = () => {
           {/* Discover */}
           <Discover/>
           {/* SuggestedAccounts */}
-          <SuggestedAccounts/>
+          <SuggestedAccounts
+            fetchAllUsers={fetchAllUsers}
+            allUsers={allUsers}
+          />
           {/* Footer */}
           <Footer/>
         </div>
