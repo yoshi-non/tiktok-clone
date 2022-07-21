@@ -1,14 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import React, { useState } from 'react'
-import Logo from "../utils/tiktik-logo.png"
+import Logo from "../utils/logo.png"
 import { IoMdAdd } from 'react-icons/io';
 import { GoogleLogin, googleLogout } from '@react-oauth/google'
 import { createOrGetUser } from '../utils'
 import useAuthStore from '../store/authStore'
 import { AiOutlineLogout } from 'react-icons/ai';
 import { BiSearch } from 'react-icons/bi';
-import Router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 
 const Navbar = () => {
   const { userProfile, addUser, removeUser } = useAuthStore()
@@ -19,7 +19,7 @@ const Navbar = () => {
     e.preventDefault()
 
     if (searchValue) {
-      Router.push(`/search/${searchValue}`)
+      router.push(`/search/${searchValue}`)
     }
   }
 
@@ -27,7 +27,7 @@ const Navbar = () => {
     <div className='w-full flex justify-between items-center border-b-2 border-gray-200 py-2 px-4'>
       <Link href="/">
         <div className='w-[100px] md:w-[130px]'>
-            <Image className='cursor-pointer' src={Logo} alt="TikTok" layout='responsive' />
+            <Image className='cursor-pointer' src={Logo} alt="Kagari's Portfolio" layout='responsive' />
         </div>
       </Link>
 
