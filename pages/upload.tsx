@@ -3,7 +3,6 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { FaCloudUploadAlt } from 'react-icons/fa'
-import { MdDelete } from "react-icons/md"
 import useAuthStore from '../store/authStore'
 import { client } from '../utils/client'
 import { topics } from '../utils/constants'
@@ -74,7 +73,7 @@ const Upload = () => {
     };
 
   return (
-    <div className='flex w-full h-full absolute left-0 top-[60px] mb-10 pt-10 lg:pt-20 bg-[#F8F8F8] justify-center'>
+    <div className='flex w-full h-full absolute left-0 top-[90px] mb-10 pt-10 lg:pt-20 bg-[#F8F8F8] justify-center'>
         <div className='bg-white rounded-lg xl:h-[80vh] flex gap-6 flex-wrap justify-center items-center p-14 pt-6'>
             <div>
                 <div>
@@ -95,15 +94,6 @@ const Upload = () => {
                                         className='rounded-xl w-[260px] h-[460px] bg-black'
                                     >
                                     </video>
-                                    {/* <div className=' flex justify-between gap-20'>
-                                        <button
-                                            type='button'
-                                            className=' rounded-full bg-gray-200 text-red-400 p-2 text-xl cursor-pointer outline-none hover:shadow-md transition-all duration-500 ease-in-out'
-                                            onClick={() => setVideoAsset(undefined)}
-                                        >
-                                            <MdDelete />
-                                        </button>
-                                    </div> */}
                                 </div>
                             ) : (
                                 <label className='cursor-pointer'>
