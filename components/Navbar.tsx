@@ -79,7 +79,7 @@ const Navbar = () => {
                 removeUser()
               }}
             >
-              <AiOutlineLogout color='red' fontSize={21}/>
+              <AiOutlineLogout color='#FD7E00' fontSize={21}/>
             </button>
           </div>
         ) : (
