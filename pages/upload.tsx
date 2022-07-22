@@ -38,30 +38,34 @@ const Upload = () => {
     }
 
     const handlePost =async () => {
-        if (caption && videoAsset?._id && category) {
-            setSavingPost(true)
-
-            const document = {
-                _type: "post",
-                caption,
-                video: {
-                    _type: "file",
-                    asset: {
-                        _type: "reference",
-                        _ref: videoAsset?._id
+        if (userProfile) {
+            if (caption && videoAsset?._id && category) {
+                setSavingPost(true)
+    
+                const document = {
+                    _type: "post",
+                    caption,
+                    video: {
+                        _type: "file",
+                        asset: {
+                            _type: "reference",
+                            _ref: videoAsset?._id
+                        },
                     },
-                },
-                userId: userProfile?._id,
-                postedBy: {
-                    _type: "postedBy",
-                    _ref: userProfile?._id
-                },
-                topic: category
+                    userId: userProfile?._id,
+                    postedBy: {
+                        _type: "postedBy",
+                        _ref: userProfile?._id
+                    },
+                    topic: category
+                }
+    
+                await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/post`, document)
+    
+                router.push('/')
             }
-
-            await axios.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/post`, document)
-
-            router.push('/')
+        } else {
+            alert("動画投稿するにはログインする必要があります。")
         }
     }
 
