@@ -11,7 +11,7 @@ const Footer = () => {
         ※検索機能に日本語対応しておりません。
         <br />
         <br />
-        2022 Kagari's Portfolio
+        2022 Kagari&apos;s Portfolio
       </p>
     </div>
   )
