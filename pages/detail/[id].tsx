@@ -173,13 +173,13 @@ const Detail = ({ postDetails } : IProps) => {
                 handleDislike={() => handleLike(false)}
               />
             )}
-            {userProfile._id === post.postedBy._id && (
-            <div className='bg-primary text-[#FD7E00] rounded-full p-2 md:p-4 mb-1 cursor-pointer'
-              onClick={handleDelete}
-            >
-              <MdDelete className='text-lg md:text-2xl'/>
-            </div>
-          )}
+            {userProfile?._id === post.postedBy._id && (
+              <div className='bg-primary text-[#FD7E00] rounded-full p-2 md:p-4 mb-1 cursor-pointer'
+                onClick={handleDelete}
+              >
+                <MdDelete className='text-lg md:text-2xl'/>
+              </div>
+            )}
           </div>
           <Comments
             comment={comment}
