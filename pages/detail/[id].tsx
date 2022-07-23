@@ -1,9 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { GoVerified } from 'react-icons/go'
-import { MdOutlineCancel } from 'react-icons/md'
+import { MdOutlineCancel, MdDelete } from 'react-icons/md'
 import { HiVolumeOff, HiVolumeUp } from "react-icons/hi"
-import { BsFillPauseFill, BsFillPlayFill } from "react-icons/bs"
-import axios from 'axios'
+import { BsFillPlayFill } from "react-icons/bs"
+import axios, { AxiosRequestConfig } from 'axios'
 import { Video } from '../../types'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
@@ -14,6 +14,10 @@ import Comments from '../../components/Comments'
 
 interface IProps {
   postDetails: Video,
+}
+
+export interface AxiosResponse {
+  config: AxiosRequestConfig<any>;
 }
 
 const Detail = ({ postDetails } : IProps) => {
@@ -42,7 +46,7 @@ const Detail = ({ postDetails } : IProps) => {
     }
   }, [post, isVideoMuted])
 
-  const handleLike =async (like: boolean) => {
+  const handleLike = async (like: boolean) => {
     if (userProfile) {
       const {data} = await axios.put(`${process.env.NEXT_PUBLIC_BASE_URL}/api/like`, {
         userId: userProfile._id,
@@ -69,6 +73,18 @@ const Detail = ({ postDetails } : IProps) => {
       setComment('')
       setIsPostingComment(false)
     }
+  }
+
+  const handleDelete = async () => {
+    const params = {
+      postId : post._id
+    }
+
+    await axios.delete(`${process.env.NEXT_PUBLIC_BASE_URL}/api/delete/${post._id}`, {
+      data: params
+    })
+
+    router.push('/')
   }
 
   if(!post) return null
@@ -149,7 +165,7 @@ const Detail = ({ postDetails } : IProps) => {
             {post.caption}
           </p>
 
-          <div className='mt-10 px-10'>
+          <div className='flex items-center gap-10 mt-5 px-10'>
             {userProfile && (
               <LikeButton
                 likes={post.likes}
@@ -157,6 +173,13 @@ const Detail = ({ postDetails } : IProps) => {
                 handleDislike={() => handleLike(false)}
               />
             )}
+            {userProfile._id === post.postedBy._id && (
+            <div className='bg-primary text-[#FD7E00] rounded-full p-2 md:p-4 mb-1 cursor-pointer'
+              onClick={handleDelete}
+            >
+              <MdDelete className='text-lg md:text-2xl'/>
+            </div>
+          )}
           </div>
           <Comments
             comment={comment}
